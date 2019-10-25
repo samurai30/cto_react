@@ -15,11 +15,9 @@ export const userLoginAttempt = (email,password) =>{
                     id:response.body.id})
             })
             .catch(error => {
-                console.log(error);
+                console.log(error.response.body);
                 dispatch({type:LOGIN_USER_FAILURE});
-                        if (error.message === 'Unauthorized') {
-                                throw new SubmissionError({_error: "Username or Password Invalid"});
-                                 }
+                throw new SubmissionError({password: error.response.body.message});
                             });
     }
 };

@@ -4,9 +4,9 @@ import {connect} from 'react-redux'
 import {addAdminRequest} from "../../actions/addAdminAction";
 import {logoutUser} from "../../actions/login_actions";
 import {Route, Switch, withRouter} from "react-router";
-import RegisterForm from "./registerForm";
-import {Bar} from "react-chartjs-2";
+import * as Push from  'push.js'
 import ChartDataSuperAdmin from "./chartComponent/chartsAdminSuper";
+import {Button} from "reactstrap";
 
 const mapDispatchToProps= {
     addAdminRequest,
@@ -40,6 +40,8 @@ class HomePageSuperAdmin extends React.Component{
     onRegister(value){
         this.props.history.push(value)
     }
+
+
     charData = {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
@@ -64,6 +66,8 @@ class HomePageSuperAdmin extends React.Component{
             borderWidth: 1
         }]
     };
+
+
     render(){
 
 
@@ -74,6 +78,7 @@ class HomePageSuperAdmin extends React.Component{
                         <h3 className="text-white font-weight-bold">SUPER ADMIN DASHBOARD</h3>
                     </div>
                 </div>
+
                 <ChartDataSuperAdmin dataChart={this.charData}/>
                 <div className="center button" onClick={() => this.onButton()}>&times;</div>
                 <div className="first center popout"><img src="svg/plus.svg" onClick={() => this.onRegister('/register-user')}/></div>

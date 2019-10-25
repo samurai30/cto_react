@@ -8,4 +8,4 @@ export const ADD_RESTAURANT_REQUEST = "ADD_RESTAURANT_REQUEST";
 export const REST_ADDED = "REST_ADDED";
 export const RESET_ADDED = "RESET_ADDED";
 export const REST_FETCHED = "REST_FETCHED";
-
+export const THRESHOLD_FAIL = "THRESHOLD_FAIL";

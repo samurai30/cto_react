@@ -11,10 +11,11 @@ import {tokenMiddleWare} from './middleware/tokenMiddleware'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import thunkMiddleware  from 'redux-thunk';
 import LoginForm from "./components/login_component/LoginForm";
+import {notificationMiddleware} from "./middleware/Notification";
 
 const store = createStore(
     reducer,
-    compose(applyMiddleware(thunkMiddleware,tokenMiddleWare))
+    compose(applyMiddleware(thunkMiddleware,tokenMiddleWare,notificationMiddleware))
 );
 
 const history = createHistory();
