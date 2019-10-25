@@ -1,0 +1,92 @@
+
+.center {
+    top: 80%;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: absolute;
+    margin: auto;
+}
+
+.button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: #ffe;
+    text-align: center;
+    line-height: 47px;
+    font-size: 30px;
+    box-shadow: 0px 0px 5px #fff;
+    cursor: pointer;
+    transform: rotate(45deg);
+    transition: 0.6s;
+    z-index: 1;
+}
+
+.popout {
+    width: 100px;
+    height: 50px;
+    transform: scale(0.1);
+    transition: 0.6s;
+    cursor: pointer;
+}
+
+.popout:hover img {
+    margin-left: -10px;
+    transition: 0.6s;
+}
+
+img {
+    height: 50px;
+    width: 100px;
+    transition: 0.6s;
+}
+
+.first img {
+    transform: rotate(-18deg);
+}
+
+.second img {
+    transform: rotate(-53deg);
+}
+
+.third img {
+    transform: rotate(-90deg);
+}
+
+.fourth img {
+    transform: rotate(-127deg);
+}
+
+.fifth img {
+    transform: rotate(-164deg);
+}
+
+.spin {
+    transform: rotate(270deg) scale(1.3);
+}
+
+.spin ~ .first {
+    transform: scale(1) rotate(18deg) translateX(-110px);
+    transition: 0.4s;
+}
+
+.spin ~ .second {
+    transform: scale(1) rotate(53deg) translateX(-110px);
+    transition: 0.5s;
+}
+
+.spin ~ .third {
+    transform: scale(1) rotate(90deg) translateX(-110px);
+    transition: 0.6s;
+}
+
+.spin ~ .fourth {
+    transform: scale(1) rotate(127deg) translateX(-110px);
+    transition: 0.6s;
+}
+
+.spin ~ .fifth {
+    transform: scale(1) rotate(164deg) translateX(-110px);
+    transition: 0.6s;
+}
