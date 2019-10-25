@@ -15,9 +15,13 @@ export const userLoginAttempt = (email,password) =>{
                     id:response.body.id})
             })
             .catch(error => {
-                console.log(error.response.body);
+
                 dispatch({type:LOGIN_USER_FAILURE});
-                throw new SubmissionError({password: error.response.body.message});
+                if (error.response.body.message !== null){
+                    throw new SubmissionError({password: error.response.body.message});
+                }else {
+                    throw new SubmissionError({password: 'Something wrong please try again'});
+                }
                             });
     }
 };
