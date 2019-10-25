@@ -50,11 +50,8 @@ class App extends React.Component{
 
 
     render(){
-
         return(
             <React.Fragment>
-
-
                <Switch>
                    <Route path='/super-admin'  component={HomePageSuperAdmin}/>
                    <Route path='/restaurant-admin' component={RestHomePage}/>
@@ -63,8 +60,6 @@ class App extends React.Component{
                    <Route path="/register-user" component={RegisterForm}/>
                    <Route path="/register-restaurant" component={RegisterRestaurantForm}/>
                </Switch>
-
-
             </React.Fragment>)
   }
 }

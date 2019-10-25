@@ -5,7 +5,6 @@ import {parseApiErrors} from "../forms/apiUtil";
 
 
 export const userLoginAttempt = (email,password) =>{
-
     return(dispatch) => {
         dispatch({type:LOGIN_REQUEST});
         return api.post('/user/login',{email,password},false).then(
@@ -32,7 +31,7 @@ export const checkUserRole = (user) =>{
                 dispatch({type:SET_USER_ROLE,role:response.body.user_role})
             })
             .catch(error=>{
-                console.log(error.response.body);
+
                 if (error.response.body.message === 'Invalid Fields'){
                     throw new SubmissionError(parseApiErrors(error.response.body));
                 }
