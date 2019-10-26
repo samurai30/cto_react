@@ -5,25 +5,27 @@ import {addAdminRequest} from "../../actions/addAdminAction";
 import {logoutUser} from "../../actions/login_actions";
 import {Route, Switch, withRouter} from "react-router";
 import ChartDataSuperAdmin from "./chartComponent/chartsAdminSuper";
+import {fetchUser} from "../../actions/uerDetails";
 
 
 const mapDispatchToProps= {
     addAdminRequest,
-    logoutUser
+    logoutUser,
+    fetchUser
 };
 const mapStateToProps = state =>({
-    ...state.addAdminReducer
-
+    ...state.addAdminReducer,
+    ...state.userDetailsReducer
 });
 
-class HomePageSuperAdmin extends React.Component{
+class HomePageStoreManager extends React.Component{
     jwtToken = window.localStorage.getItem('jwtToken');
-
+    user_id = window.localStorage.getItem('user_id');
     componentDidMount() {
         if (!this.jwtToken){
             this.props.history.push('/login')
         }
-
+        this.props.fetchUser(this.user_id)
     }
 
     onButton(){
@@ -93,5 +95,5 @@ class HomePageSuperAdmin extends React.Component{
 
 }
 
-export default reduxForm({form:'addAdmin'})(connect(mapStateToProps,mapDispatchToProps)(HomePageSuperAdmin));
+export default reduxForm({form:'addAdmin'})(connect(mapStateToProps,mapDispatchToProps)(HomePageStoreManager));
 

@@ -1,25 +1,21 @@
-import {LOGIN_REQUEST, LOGIN_USER_FAILURE, LOGIN_USER_SUCCESS} from "../actions/defaults";
+import {USER_ADDED, USER_ADDED_RESET} from "../actions/defaults";
 
 export default(state ={
-    isLoading: false
+    isLoading: false,
+    user_added: false
 },action) => {
     switch (action.type) {
-        case LOGIN_REQUEST:
+        case USER_ADDED:
             return{
                 ...state,
-                isLoading: true
+                isLoading: true,
+                user_added: true
             };
-        case LOGIN_USER_SUCCESS:
-            return{
-                ...state,
-                isLoading: false
-            };
-        case LOGIN_USER_FAILURE:
+        case USER_ADDED_RESET:
             return {
                 ...state,
-                isLoading: false
+                user_added: false
             };
-
         default:
             return state;
 

@@ -20,7 +20,7 @@ export const userLoginAttempt = (email,password) =>{
                 if (error.response.body.message !== null){
                     throw new SubmissionError({password: error.response.body.message});
                 }else {
-                    throw new SubmissionError({password: 'Something wrong please try again'});
+                    throw new SubmissionError({_error: error.response.body.message});
                 }
                             });
     }

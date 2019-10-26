@@ -1,6 +1,7 @@
 import {api} from "../super_agent";
 import {SubmissionError} from "redux-form";
 import {parseApiErrors} from "../forms/apiUtil";
+import {RESET_ADDED, USER_ADDED, USER_ADDED_RESET} from "./defaults";
 
 
 export const addAdminRequest = (values) =>{
@@ -9,15 +10,22 @@ export const addAdminRequest = (values) =>{
 
         return api.post('/user/add_users',values,true)
             .then(response =>{
-                console.log(response.body)
+                dispatch({type:USER_ADDED});
+                setTimeout(()=>{dispatch({type: USER_ADDED_RESET})},5);
             })
             .catch(error =>{
                 console.log(error.response);
                 if (error.response.body.message === 'Invalid Fields'){
                     throw new SubmissionError(parseApiErrors(error.response.body));
-                }else {
-                    throw new SubmissionError(error.response.body.message);
                 }
+                if (error.response.body.status === 401)
+                {
+                    throw new SubmissionError({_error:error.response.body.message});
+                }
+                throw new SubmissionError({_error:error.response.body.message});
+
+
+
 
 
             })

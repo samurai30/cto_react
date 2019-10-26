@@ -23,8 +23,7 @@ class RegisterRestaurantForm extends React.Component{
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.added){
-            alert('Restaurant Added');
-            this.props.history.push('/super-admin');
+            alert('Restaurant Added')
         }
     }
 

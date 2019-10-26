@@ -11,36 +11,36 @@ const mapDispatchToProps= {
 const mapStateToProps = state =>({
     ...state.restaruantReducer
 });
-class RegisterRestaurantForm extends React.Component{
+class registerOutlet extends React.Component{
     componentDidMount() {
 
     }
     onBack(){
-        this.props.history.push('/super-admin')
+        this.props.history.push('/restaurant-admin')
     }
     onSubmit(value){
         return this.props.createRestaurant(value);
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.added){
-            alert('Restaurant Added');
-            this.props.history.push('/super-admin');
+            alert('Store Manager Added');
+            this.props.history.push('/');
         }
     }
 
     render() {
-        const {handleSubmit,added} = this.props;
+        const {handleSubmit} = this.props;
 
         return(
             <React.Fragment>
                 <br/>
                 <div className="d-flex justify-content-center">
-                    <h4>Register Restaurants</h4>
+                    <h4>Register Store Manager</h4>
                 </div>
                 <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                    <Field name="name"  type="text" placeholder="Restaurant Name"  component={renderField}/>
-                    <Field name="owner_name"  type="text" placeholder="Owner Name"  component={renderField}/>
-                    <Field name="owner_contact"  type="text" placeholder="Contact Number"  component={renderField}/>
+                    <Field name="address"  type="text" placeholder="Restaurant Name"  component={renderField}/>
+                    <Field name="contact"  type="text" placeholder="Owner Name"  component={renderField}/>
+                    <Field name="manager_id"  type="text" placeholder="Contact Number"  component={renderField}/>
                     <Button type="submit" className="btn btn-secondary">Submit</Button>
                 </form>
                 <div className="d-flex justify-content-center">
@@ -50,4 +50,4 @@ class RegisterRestaurantForm extends React.Component{
     }
 }
 
-export default reduxForm({form:'register_restaurant'})(connect(mapStateToProps,mapDispatchToProps)(RegisterRestaurantForm));
+export default reduxForm({form:'register_restaurant'})(connect(mapStateToProps,mapDispatchToProps)(registerOutlet));

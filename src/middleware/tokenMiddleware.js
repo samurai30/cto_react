@@ -21,6 +21,7 @@ export const tokenMiddleWare = store => next => action =>{
             window.localStorage.removeItem('user_id');
 
             api.setToken(null);
+            break;
         default:
     }
     next(action)

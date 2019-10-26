@@ -13,17 +13,15 @@ const mapDispatchToProps= {
 };
 const mapStateToProps = state =>({
     ...state.addAdminReducer
-
 });
 
-class HomePageSuperAdmin extends React.Component{
+class HomePageOutletManager extends React.Component{
     jwtToken = window.localStorage.getItem('jwtToken');
 
     componentDidMount() {
         if (!this.jwtToken){
             this.props.history.push('/login')
         }
-
     }
 
     onButton(){
@@ -93,5 +91,5 @@ class HomePageSuperAdmin extends React.Component{
 
 }
 
-export default reduxForm({form:'addAdmin'})(connect(mapStateToProps,mapDispatchToProps)(HomePageSuperAdmin));
+export default reduxForm({form:'addAdmin'})(connect(mapStateToProps,mapDispatchToProps)(HomePageOutletManager));
 

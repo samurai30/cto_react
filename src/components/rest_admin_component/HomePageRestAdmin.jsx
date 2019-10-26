@@ -5,25 +5,30 @@ import {addAdminRequest} from "../../actions/addAdminAction";
 import {logoutUser} from "../../actions/login_actions";
 import {Route, Switch, withRouter} from "react-router";
 import ChartDataSuperAdmin from "./chartComponent/chartsAdminSuper";
+import {fetchUser} from "../../actions/uerDetails";
+import {LOGIN_USER_FAILURE} from "../../actions/defaults";
 
 
 const mapDispatchToProps= {
     addAdminRequest,
-    logoutUser
+    logoutUser,
+    fetchUser
 };
 const mapStateToProps = state =>({
-    ...state.addAdminReducer
-
+    ...state.addAdminReducer,
+    ...state.userDetailsReducer
 });
 
-class HomePageSuperAdmin extends React.Component{
+class HomePageRestAdmin extends React.Component{
     jwtToken = window.localStorage.getItem('jwtToken');
+    user_id = window.localStorage.getItem('user_id');
+
 
     componentDidMount() {
         if (!this.jwtToken){
             this.props.history.push('/login')
         }
-
+        this.props.fetchUser(this.user_id)
     }
 
     onButton(){
@@ -71,20 +76,27 @@ class HomePageSuperAdmin extends React.Component{
 
     render(){
 
+        const {__error} = this.props;
+        if (__error){
+            alert(__error);
+            this.props.dispatch({type:LOGIN_USER_FAILURE});
+            window.location.reload()
+        }
+
 
         return(
             <div>
                 <div className="jumbotron bg-primary">
                     <div className="d-flex justify-content-center">
-                        <h3 className="text-white font-weight-bold">SUPER ADMIN DASHBOARD</h3>
+                        <h3 className="text-white font-weight-bold">RESTAURANT ADMIN DASHBOARD</h3>
                     </div>
                 </div>
 
                 <ChartDataSuperAdmin dataChart={this.charData}/>
                 <div className="center button" onClick={() => this.onButton()}>&times;</div>
-                <div className="first center popout"><img src="svg/plus.svg" onClick={() => this.onRegister('/register-user')}/></div>
-                <div className="second center popout"><img src="svg/shop.svg" onClick={() => this.onRegister('/register-restaurant')} /></div>
-                <div className="third center popout"><img src="svg/seo.svg" onClick={() => this.onRegister('/register-user')} /></div>
+                <div className="first center popout"><img src="svg/plus.svg" onClick={() => this.onRegister('/register-store_manager')}/></div>
+                <div className="second center popout"><img src="svg/shop.svg" onClick={() => this.onRegister('/register-supplier')} /></div>
+                <div className="third center popout"><img src="svg/seo.svg" onClick={() => this.onRegister('/register-outlet')} /></div>
                 <div className="fourth center popout"><img src="svg/manager.svg" onClick={() => this.onRegister('/register-user')} /></div>
                 <div className="fifth center popout"><img src="svg/logout.svg" onClick={() => this.onLogout()}/></div>
 
@@ -93,5 +105,5 @@ class HomePageSuperAdmin extends React.Component{
 
 }
 
-export default reduxForm({form:'addAdmin'})(connect(mapStateToProps,mapDispatchToProps)(HomePageSuperAdmin));
+export default reduxForm({form:'addAdmin'})(connect(mapStateToProps,mapDispatchToProps)(HomePageRestAdmin));
 

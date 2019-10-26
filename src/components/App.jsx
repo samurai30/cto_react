@@ -3,13 +3,15 @@ import {Route, Switch, withRouter,Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {checkUserRole, logoutUser} from "../actions/login_actions";
 import './App.css'
-import RestHomePage from "./rest_admin_component/RestHomePage";
 import HomePageSuperAdmin from "./super_admin_component/HomePageSuperAdmin";
-import RegisterForm from "./super_admin_component/registerForm";
 import RegisterRestaurantForm from "./super_admin_component/registerRestaurant/registerRestaurant";
-import {Bar, Doughnut} from "react-chartjs-2";
-
-
+import HomePageRestAdmin from "./rest_admin_component/HomePageRestAdmin";
+import HomePageOutletManager from "./outletManagerDash/HomePageOutletManager";
+import HomePageStoreManager from "./storeManagerDash/HomePageStoreManager";
+import RegisterForm from './super_admin_component/registerForm'
+import RegisterStoreManager from './rest_admin_component/registerStoreManager/registerStoreManager'
+import registerSupplier from "./rest_admin_component/registerSupplier/registerSupplier";
+import registerOutlet from "./rest_admin_component/registerOutlets/registerOutlet";
 const mapStateToProps = state=>(
     {...state.loginReducer}
 );
@@ -35,6 +37,7 @@ class App extends React.Component{
     componentDidUpdate(prevProps, prevState, snapshot) {
 
         if (prevProps.role !== this.props.role){
+            console.log(this.props.role);
             if (this.props.role === 'super_admin') {
                 this.props.history.replace('/super-admin')
             }else if(this.props.role === 'restaurant_admin'){
@@ -54,11 +57,17 @@ class App extends React.Component{
             <React.Fragment>
                <Switch>
                    <Route path='/super-admin'  component={HomePageSuperAdmin}/>
-                   <Route path='/restaurant-admin' component={RestHomePage}/>
-                   <Route path='/store-manager' component={RestHomePage}/>
-                   <Route path='/outlet-manager' component={RestHomePage}/>
+                   <Route path='/restaurant-admin' component={HomePageRestAdmin}/>
+                   <Route path='/store-manager' component={HomePageStoreManager}/>
+                   <Route path='/outlet-manager' component={HomePageOutletManager}/>
+                   /*super*/
                    <Route path="/register-user" component={RegisterForm}/>
                    <Route path="/register-restaurant" component={RegisterRestaurantForm}/>
+
+                   /*rest*/
+                   <Route path="/register-store_manager" component={RegisterStoreManager}/>
+                   <Route path="/register-supplier" component={registerSupplier}/>
+                   <Route path="/register-outlet" component={registerOutlet}/>
                </Switch>
             </React.Fragment>)
   }

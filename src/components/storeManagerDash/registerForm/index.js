@@ -31,23 +31,16 @@ const mapDispatchToProps = {
         console.log(value);
         return this.props.addAdminRequest(value)
     }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.user_added){
-            alert('User Added');
-            this.props.history.push('/super-admin');
-        }
-    }
-
-     render() {
+    render() {
         const {handleSubmit,rest_data,error} = this.props;
-
         const roles = [
                 {value:'RESTAURANT_ADMIN', id:'restaurant_admin'}
                 ,{value:'STORE_ADMIN', id:'store_admin'}
                 ,{value:'OUTLET_ADMIN', id:'outlet_admin'}];
 
-
+        if (error){
+            console.log(error)
+        }
         return(
             <React.Fragment>
                 <br/>
@@ -56,21 +49,17 @@ const mapDispatchToProps = {
                 </div>
 
                 {rest_data && (rest_data.length !== 0)
-                    ? <div>
-                        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                            <Field name="name"  type="text" placeholder="Full Name"  component={renderField}/>
-                            <Field name="address"  type="text" placeholder="Address"  component={renderField}/>
-                            <Field name="contact"  type="text" placeholder="Contact"  component={renderField}/>
-                            <Field name="email"  type="text" placeholder="Email"  component={renderField}/>
-                            <Field name="password"  type="password" placeholder="Password"  component={renderField}/>
-                            <Field name="repeat_password"  type="password" placeholder="Repeat Password"  component={renderField}/>
-                            <Field name="role" type="select" label="SELECT ROLES" selectItems={roles} component={renderField}/>
-                            <Field name="restaurant_id" type="select" label="SELECT RESTAURANT"  selectItems={(rest_data && rest_data)} component={renderField}/>
-                            <Button type="submit" className="btn btn-secondary">Submit</Button>
-
-                        </form>
-                        {error && <span className="alert-warning">{error}</span>}
-                    </div>
+                    ? <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+                        <Field name="name"  type="text" placeholder="Full Name"  component={renderField}/>
+                        <Field name="address"  type="text" placeholder="Address"  component={renderField}/>
+                        <Field name="contact"  type="text" placeholder="Contact"  component={renderField}/>
+                        <Field name="email"  type="text" placeholder="Email"  component={renderField}/>
+                        <Field name="password"  type="password" placeholder="Password"  component={renderField}/>
+                        <Field name="repeat_password"  type="password" placeholder="Repeat Password"  component={renderField}/>
+                        <Field name="role" type="select" label="SELECT ROLES" selectItems={roles} component={renderField}/>
+                        <Field name="restaurant_id" type="select" label="SELECT RESTAURANT"  selectItems={(rest_data && rest_data)} component={renderField}/>
+                        <Button type="submit" className="btn btn-secondary">Submit</Button>
+                    </form>
                 :<div>
                         <h3>Sorry no restaurants found</h3>
                         <Link to='/register-restaurant'>ADD RESTAURANT</Link>
